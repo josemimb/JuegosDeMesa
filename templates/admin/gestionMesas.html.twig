@@ -1,0 +1,203 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<head>
+
+<style>
+        #droppable { width: 800px; height: 500px; padding: 0.5em; float: left; margin: 10px; }
+        #draggable, #draggable-nonvalid { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+        
+        .sala{
+    position: absolute;
+    left: 0;
+    top: 0;
+    /*border: 1px solid;*/
+    width: 100%;
+    height: 92%;
+}
+
+.mesa{
+    position: relative;
+    width: 140px;
+    height: 140px;
+    background-color: brown;
+    margin: 5px;
+}
+
+
+
+
+.contenedor{
+    position: relative;
+    width: 100%;
+    min-width: 1300px;
+
+}
+
+.almacen{
+    position: absolute;
+    /*left: 1000px;*/
+    margin-top: 110px;
+    top: 0;
+  /* border: 1px solid;*/
+    width: 100%;
+    height: 76%;
+}
+        </style>
+
+        <script src="js/drop.js"></script>
+
+</head>
+
+<body class="bg-dark">
+
+<h1>ARRASTRA A LA MESA DE JUEGO</h1>
+{# respuesta ajax #}
+<div class="col-md-10">
+<table id="userTable" class="table table-sm table-striped">
+<thead>
+<tr>
+<th width="5%">ID</th>
+<th width="5%">Nombre</th>
+<th width="20%">ancho</th>
+<th width="20%">alto</th>
+<th width="30%">x</th>
+<th width="30%">y</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+</div>
+ {# <h1>aaa</h1>
+    <div class="contenedor">
+        <div id="sala" class="sala"></div>
+
+        <div class="almacen" id="almacen">
+            <div class="mesa"></div>
+            <div class="mesa"></div>
+        </div>
+        
+    </div> #}
+
+
+                    <!--form Modal -->
+                    <div class="modal fade text-left" id="inlineForm" tabindex="-1" aria-labelledby="myModalLabel33" style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-success">
+                            <h4 class="modal-title" id="myModalLabel33">Nueva mesa </h4>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </button>
+                            </div>
+                            <form action="#">
+                            <div class="modal-body">
+                                <label>Nombre: </label>
+                                <div class="form-group">
+                                <input type="text" placeholder="Nombre" class="form-control">
+                                </div>
+                                <label>Ancho: </label>
+                                <div class="form-group">
+                                <input type="int" placeholder="Ancho" class="form-control">
+                                </div>
+                                <label>Alto: </label>
+                                <div class="form-group">
+                                <input type="int" placeholder="Alto" class="form-control">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                <i class="bx bx-x d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Cancelar</span>
+                                </button>
+                                <button type="button" class="btn btn-primary ml-1" data-bs-dismiss="modal">
+                                <i class="bx bx-check d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Crear</span>
+                                </button>
+                            </div>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+              
+  
+
+<div class=" row m-5 p-3" id="table-striped">
+
+<div class="col-12">
+    <div class="card shadow-lg mb-5 bg-body rounded">
+      <div class="card-header mb-5">
+        <h1 class="card-title text-center">GESTION DE RESERVAS</h1>
+      </div>
+
+      
+      <section id="basic-horizontal-layouts" >
+    <div class="row match-height p-3">
+        <div class="col-md-4 col-12">
+        <div class="card">
+            <div class="card-header ">
+            <h4 class="card-title">ALMACEN  
+            
+            
+            <a href="" class="mt-4 d-flex flex-row-reverse" data-bs-toggle="modal" data-bs-target="#inlineForm"> Nueva
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+              </svg></a>
+            </h4>
+            
+            </div>
+            <div class="card-content ">
+            <div class="card-body" style="height:600px;">
+
+            <div class="almacen" id="almacen1">
+                                <div class="mesa" id="ancho"></div>
+
+                                
+                            </div>
+               
+                 <div class="almacen" id="almacen">
+                                <div class="mesa"></div>
+                                <div class="mesa"></div>
+                            </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-8 col-12">
+        <div class="card">
+            <div class="card-header">
+            <h4 class="card-title">SALA</h4>
+            </div>
+            <div class="card-content">
+            <div class="card-body" style="height:600px">
+
+                               
+
+
+                            <div id="sala" class="sala mt-5"></div>
+
+                           
+
+                           
+                            
+                        </div>
+                  {# <div id="droppable" class="ui-widget-header">
+                  <div class="element"></div> #}
+                  <!-- <p>accept: &apos;#draggable&apos;</p> -->
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </section>
+    </div>
+     
+</div>
+
+</div>
+</body>
+
+{% endblock %}
