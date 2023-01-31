@@ -1,4 +1,4 @@
-#Reservas de Juegos de Mesa
+# Reservas de Juegos de Mesa
 Proyecto propuesto para el segundo trimestre de DAW
 
 En este proyecto se van a utilizar las tecnologias: php (con symfony) jQuery y bootstrap
